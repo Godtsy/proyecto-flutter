@@ -12,6 +12,7 @@ class CustomBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // 1. Botón izquierdo circular
             Container(
               width: 52,
               height: 52,
@@ -31,6 +32,7 @@ class CustomBottomBar extends StatelessWidget {
 
             const SizedBox(width: 8),
 
+            // 2. Contenedor central (Píldora fija del módulo Planner)
             Expanded(
               child: Container(
                 height: 56,
@@ -49,21 +51,21 @@ class CustomBottomBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    // Planner activo (porque es su módulo)
                     _buildStaticNavItem(
                       icon: Icons.checklist_rounded,
                       label: "Planner",
                       color: const Color(0xFF2B71F3),
                       isBold: true,
                     ),
-
+                    // Importaciones inactivo / fuera de alcance
                     _buildStaticNavItem(
                       icon: Icons.inventory_2_outlined,
                       label: "Importaciones",
                       color: Colors.grey.shade400,
                       isBold: false,
                     ),
-
-                    // Elemento 3: Ventas
+                    // Ventas inactivo / fuera de alcance
                     _buildStaticNavItem(
                       icon: Icons.local_offer_outlined,
                       label: "Ventas",
@@ -77,6 +79,7 @@ class CustomBottomBar extends StatelessWidget {
 
             const SizedBox(width: 8),
 
+            // 3. Botón derecho circular (Asistente)
             Container(
               width: 52,
               height: 52,

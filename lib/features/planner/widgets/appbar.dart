@@ -58,7 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 8,
                     height: 8,
                     decoration: const BoxDecoration(
-                      color: Colors.amber,
+                      color: Color.fromARGB(255, 253, 253, 253),
                       shape: BoxShape.circle,
                     ),
                   ),

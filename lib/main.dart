@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'features/planner/widgets/appbar.dart';
-import 'features/planner/widgets/bottombar.dart';
+import 'features/planner/views/planner_screen.dart';
 
 void main() {
   runApp(const MiAppPrueba());
@@ -12,13 +11,9 @@ class MiAppPrueba extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: const CustomAppBar(),
-        body: const Center(child: Text('Hola, ya funciona')),
-        bottomNavigationBar: const CustomBottomBar(),
-      ),
+      home: PlannerScreen(),
     );
   }
 }
