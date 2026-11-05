@@ -18,7 +18,6 @@ class _PlannerScreenState extends State<PlannerScreen> {
   // Índice exclusivo para las 3 sub-vistas de Planner (0: Mi día, 1: Mis tareas, 2: Mis planes)
   int _currentSubViewIndex = 0;
 
-  // Las vistas que sí te corresponden maquetar según el diseño de Figma
   final List<Widget> _plannerSubViews = const [
     MiDiaView(),
     MisTareasView(),
@@ -32,7 +31,6 @@ class _PlannerScreenState extends State<PlannerScreen> {
 
       body: Column(
         children: [
-          // 1. Selector superior para alternar entre Mi día, Mis tareas y Mis planes
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
@@ -53,7 +51,6 @@ class _PlannerScreenState extends State<PlannerScreen> {
         ],
       ),
 
-      // 3. Footer estático (indicando que estamos en Planner, sin alterar el flujo)
       bottomNavigationBar: const CustomBottomBar(),
     );
   }
