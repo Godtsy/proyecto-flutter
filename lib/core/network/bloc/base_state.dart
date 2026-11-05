@@ -1,6 +1,6 @@
 part of 'base_bloc.dart';
 
-sealed class BaseState extends Equatable {
+abstract class BaseState extends Equatable {
   const BaseState();
 
   @override
