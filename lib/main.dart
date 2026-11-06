@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-
-import 'features/planner/views/planner_screen.dart';
+import 'package:mi_app_prueba/core/navigation/app_routes.dart';
+import 'package:mi_app_prueba/core/navigation/landing_routes.dart';
 
 void main() {
-  runApp(const MiAppPrueba());
+  runApp(MiAppPrueba());
 }
 
 class MiAppPrueba extends StatelessWidget {
-  const MiAppPrueba({super.key});
+  MiAppPrueba({super.key});
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      navigatorKey: _navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: PlannerScreen(),
+      initialRoute: AppRoutes.planner,
+      onGenerateRoute: LandingRoutes.generateRotes,
     );
   }
 }
