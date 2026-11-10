@@ -36,7 +36,6 @@ class TaskCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // 1. Círculo de selección
           Container(
             width: 22,
             height: 22,

@@ -26,7 +26,7 @@ abstract class BaseBloc<T, R> extends Bloc<T, R> {
   ) async {
     late final String messageException;
     switch (exception.type) {
-      case DioException.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         messageException = NetworkStatus.connectTimeout.toStatusKey();
         break;
       case DioExceptionType.sendTimeout:

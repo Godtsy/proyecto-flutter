@@ -8,7 +8,7 @@ import 'package:mi_app_prueba/shared/loader/loader.dart';
 
 import '../widgets/appbar.dart';
 import '../widgets/bottombar.dart';
-import '../widgets/custom_selector.dart'; // Tu selector superior
+import '../widgets/custom_selector.dart';
 import 'mi_dia.dart';
 import 'mis_planes.dart';
 import 'mis_tareas.dart';
@@ -22,20 +22,12 @@ class PlannerScreen extends StatefulWidget {
 
 class _PlannerScreenState extends State<PlannerScreen> {
   int _currentSubViewIndex = 0;
-  late final PlannerBloc _plannerBloc;
 
   final List<Widget> _plannerSubViews = const [
     MiDiaView(),
     MisTareasView(),
     MisPlanesView(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    _plannerBloc = context.read<PlannerBloc>();
-    _getMyGroups();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +69,14 @@ class _PlannerScreenState extends State<PlannerScreen> {
                   ),
                 ),
 
-                // 2. Contenido dinámico de la sub-vista seleccionada
                 Expanded(child: _plannerSubViews[_currentSubViewIndex]),
               ],
             ),
 
-            bottomNavigationBar: const CustomBottomBar(),
+            bottomNavigationBar: CustomBottomBar(onTap: _getMyGroups),
           ),
-          BlocBuilder(
+
+          BlocBuilder<PlannerBloc, BaseState>(
             builder: (context, state) {
               if (state is PlannerInProgres) {
                 return Loader();
@@ -98,6 +90,6 @@ class _PlannerScreenState extends State<PlannerScreen> {
   }
 
   void _getMyGroups() {
-    _plannerBloc.add(MyGroupRequested());
+    context.read<PlannerBloc>().add(MyGroupRequested());
   }
 }

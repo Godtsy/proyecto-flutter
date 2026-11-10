@@ -14,7 +14,6 @@ class MisTareasView extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
 
-          // Botón superior "Nueva tarea" alineado a la derecha
           ElevatedButton.icon(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
@@ -35,11 +34,9 @@ class MisTareasView extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // Lista de secciones (Pendientes, En curso, Completadas)
           Expanded(
             child: ListView(
               children: [
-                // --- BLOQUE 1: PENDIENTES ---
                 _buildSectionContainer(
                   title: "Pendientes",
                   children: const [
@@ -59,7 +56,6 @@ class MisTareasView extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // --- BLOQUE 2: EN CURSO ---
                 _buildSectionContainer(
                   title: "En curso",
                   children: const [
@@ -73,7 +69,6 @@ class MisTareasView extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // --- BLOQUE 3: COMPLETADAS ---
                 _buildSectionContainer(
                   title: "Completadas",
                   children: const [
@@ -94,7 +89,6 @@ class MisTareasView extends StatelessWidget {
     );
   }
 
-  // Contenedor visual blanco que agrupa cada bloque de estado
   Widget _buildSectionContainer({
     required String title,
     required List<Widget> children,
