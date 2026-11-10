@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mi_app_prueba/core/errors/failure.dart';
+import 'package:mi_app_prueba/core/network/bloc/base_bloc.dart';
+import 'package:mi_app_prueba/features/planner/bloc/planner_bloc.dart';
+import 'package:mi_app_prueba/features/planner/models/group_model.dart';
+import 'package:mi_app_prueba/shared/loader/loader.dart';
 
 import '../widgets/appbar.dart';
 import '../widgets/bottombar.dart';
-import '../widgets/custom_selector.dart'; // Tu selector superior
+import '../widgets/custom_selector.dart';
 import 'mi_dia.dart';
 import 'mis_planes.dart';
 import 'mis_tareas.dart';
@@ -15,7 +21,6 @@ class PlannerScreen extends StatefulWidget {
 }
 
 class _PlannerScreenState extends State<PlannerScreen> {
-  // Índice exclusivo para las 3 sub-vistas de Planner (0: Mi día, 1: Mis tareas, 2: Mis planes)
   int _currentSubViewIndex = 0;
 
   final List<Widget> _plannerSubViews = const [
@@ -26,32 +31,65 @@ class _PlannerScreenState extends State<PlannerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(),
+    return BlocListener<PlannerBloc, BaseState>(
+      listener: (context, state) {
+        switch (state) {
+          case GroupsObtained(:final List<GroupModel> groups):
+            print('resultado groups: $groups');
+            break;
 
-      body: Column(
+          case PlannerError(:final String error):
+            print('Error: $error');
+            break;
+
+          case NetworkException(:final Failure failure):
+            print('${failure.message}');
+            break;
+        }
+      },
+      child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 12.0,
+          Scaffold(
+            appBar: const CustomAppBar(),
+
+            body: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 12.0,
+                  ),
+                  child: CustomSelector(
+                    selectedIndex: _currentSubViewIndex,
+                    onTabSelected: (index) {
+                      setState(() {
+                        _currentSubViewIndex = index;
+                      });
+                    },
+                  ),
+                ),
+
+                Expanded(child: _plannerSubViews[_currentSubViewIndex]),
+              ],
             ),
-            child: CustomSelector(
-              selectedIndex: _currentSubViewIndex,
-              onTabSelected: (index) {
-                setState(() {
-                  _currentSubViewIndex = index;
-                });
-              },
-            ),
+
+            bottomNavigationBar: CustomBottomBar(onTap: _getMyGroups),
           ),
 
-          // 2. Contenido dinámico de la sub-vista seleccionada
-          Expanded(child: _plannerSubViews[_currentSubViewIndex]),
+          BlocBuilder<PlannerBloc, BaseState>(
+            builder: (context, state) {
+              if (state is PlannerInProgres) {
+                return Loader();
+              }
+              return Container();
+            },
+          ),
         ],
       ),
-
-      bottomNavigationBar: const CustomBottomBar(),
     );
+  }
+
+  void _getMyGroups() {
+    context.read<PlannerBloc>().add(MyGroupRequested());
   }
 }

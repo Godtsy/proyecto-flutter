@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomBar extends StatelessWidget {
-  const CustomBottomBar({super.key});
+  final VoidCallback onTap;
+
+  const CustomBottomBar({required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,6 @@ class CustomBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // 1. Botón izquierdo circular
             Container(
               width: 52,
               height: 52,
@@ -32,7 +33,6 @@ class CustomBottomBar extends StatelessWidget {
 
             const SizedBox(width: 8),
 
-            // 2. Contenedor central (Píldora fija del módulo Planner)
             Expanded(
               child: Container(
                 height: 56,
@@ -79,28 +79,30 @@ class CustomBottomBar extends StatelessWidget {
 
             const SizedBox(width: 8),
 
-            // 3. Botón derecho circular (Asistente)
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: const Color(0xFF2B71F3).withValues(alpha: 0.4),
-                  width: 2,
-                ),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
+            GestureDetector(
+              onTap: onTap,
+              child: Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color(0xFF2B71F3).withValues(alpha: 0.4),
+                    width: 2,
                   ),
-                ],
-              ),
-              child: const Icon(
-                Icons.smart_toy_outlined,
-                color: Color(0xFF2B71F3),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.smart_toy_outlined,
+                  color: Color(0xFF2B71F3),
+                ),
               ),
             ),
           ],

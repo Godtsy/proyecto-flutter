@@ -9,5 +9,6 @@ class HeadersInterceptors extends QueuedInterceptor {
     options.headers['AppBundle'] = 'com.nucodiga.tectrans';
     options.headers['OSClient'] = 'iOS';
     options.headers['Authorization'] = 'Bearer $urlTokend';
+    handler.next(options);
   }
 }

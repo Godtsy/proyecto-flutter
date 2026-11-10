@@ -1,11 +1,11 @@
 class GroupModel {
   final String id;
-  final DateTime createdDateTime;
-  final String description;
+  final DateTime? createdDateTime;
+  final String? description;
   final String displayName;
-  final String mail;
-  final String mailNickname;
-  final String visibility;
+  final String? mail;
+  final String? mailNickname;
+  final String? visibility;
 
   GroupModel({
     required this.id,

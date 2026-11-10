@@ -9,7 +9,16 @@ class PlannerServices {
   PlannerServices() : _dioClient = DioClient.buildClient();
 
   Future<ApiCollection<GroupModel>> getMyGroups() async {
-    final Response apiResponse = await _dioClient.get(ApiConstants.getMyGroups);
-    return ApiCollection.fromJson(apiResponse.data, GroupModel.fromJson);
+    print('si entro');
+    try {
+      final Response apiResponse = await _dioClient.get(
+        ApiConstants.getMyGroups,
+      );
+      print(apiResponse);
+      return ApiCollection.fromJson(apiResponse.data, GroupModel.fromJson);
+    } catch (error) {
+      print(error);
+      rethrow;
+    }
   }
 }

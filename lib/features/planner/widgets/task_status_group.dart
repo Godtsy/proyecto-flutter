@@ -19,7 +19,6 @@ class TaskStatusGroup extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Círculo de selección
           Container(
             width: 22,
             height: 22,
@@ -33,7 +32,6 @@ class TaskStatusGroup extends StatelessWidget {
           ),
           const SizedBox(width: 14),
 
-          // Información de la tarea
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +58,6 @@ class TaskStatusGroup extends StatelessWidget {
             ),
           ),
 
-          // Icono de opciones a la derecha (...)
           Icon(Icons.more_vert, size: 18, color: Colors.blue.shade600),
         ],
       ),

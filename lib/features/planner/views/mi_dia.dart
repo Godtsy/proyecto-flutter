@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/task_card.dart'; // Importamos el widget reutilizable task_card
+import '../widgets/task_card.dart';
 
 class MiDiaView extends StatelessWidget {
   const MiDiaView({super.key});
@@ -14,7 +14,6 @@ class MiDiaView extends StatelessWidget {
         children: [
           const SizedBox(height: 12),
 
-          // Botón "Nueva tarea" alineado a la derecha como en Figma
           ElevatedButton.icon(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
@@ -35,7 +34,6 @@ class MiDiaView extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // Lista de tarjetas de tareas consumiendo el componente TaskCard
           Expanded(
             child: ListView(
               children: const [

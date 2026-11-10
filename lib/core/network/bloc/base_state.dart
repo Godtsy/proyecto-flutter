@@ -12,4 +12,7 @@ final class BaseInitial extends BaseState {}
 final class NetworkException extends BaseState {
   final Failure failure;
   NetworkException({required this.failure});
+
+  @override
+  List<Object> get props => [failure.code, failure.message];
 }

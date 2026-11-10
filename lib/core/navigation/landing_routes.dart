@@ -9,9 +9,9 @@ class LandingRoutes {
     final Object? arguments = settings.arguments;
     switch (settings.name) {
       case AppRoutes.planner:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider<PlannerBloc>(
-            create: (context) => PlannerBloc(),
+        return MaterialPageRoute<PlannerScreen>(
+          builder: (BuildContext context) => BlocProvider<PlannerBloc>(
+            create: (BuildContext context) => PlannerBloc(),
             child: PlannerScreen(),
           ),
         );

@@ -20,7 +20,7 @@ class PlannerBloc extends BaseBloc<PlannerEvent, BaseState> {
     MyGroupRequested event,
     Emitter<BaseState> emit,
   ) async {
-    emit(PlannerInProgres());
+    //emit(PlannerInProgres());
     try {
       final ApiCollection<GroupModel> responseApi = await _plannerServices
           .getMyGroups();

@@ -23,7 +23,6 @@ class PlanCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Nombre del plan
           Text(
             planName,
             style: const TextStyle(
@@ -35,7 +34,6 @@ class PlanCard extends StatelessWidget {
             ),
           ),
 
-          // Avatares superpuestos simulando a los participantes
           SizedBox(
             width: 80,
             height: 32,
@@ -61,7 +59,6 @@ class PlanCard extends StatelessWidget {
     );
   }
 
-  // Método auxiliar para construir cada círculo de avatar con borde blanco
   Widget _buildAvatar(Color backgroundColor, IconData icon) {
     return Container(
       decoration: BoxDecoration(
