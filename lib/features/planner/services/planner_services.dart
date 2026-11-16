@@ -10,15 +10,15 @@ class PlannerServices {
   PlannerServices() : _dioClient = DioClient.buildClient();
 
   Future<ApiCollection<GroupModel>> getMyGroups() async {
-    print('si entro');
+    print('getMyGroups entro');
     try {
       final Response apiResponse = await _dioClient.get(
         ApiConstants.getMyGroups,
       );
-      print(apiResponse);
+      print('getMyGroups respuesta: $apiResponse');
       return ApiCollection.fromJson(apiResponse.data, GroupModel.fromJson);
     } catch (error) {
-      print(error);
+      print('getMyGroups error: $error');
       rethrow;
     }
   }
@@ -26,17 +26,18 @@ class PlannerServices {
   Future<ApiCollection<IdPlanGroupModel>> getPlansByGroupId(
     String groupId,
   ) async {
+    print('getPlansByGroupId entro (groupId: $groupId)');
     try {
       final Response apiResponse = await _dioClient.get(
-        ApiConstants.getPlansByGroupId,
-        queryParameters: {'groupId': groupId},
+        '${ApiConstants.getPlansByGroupId}/$groupId',
       );
+      print('getPlansByGroupId respuesta: $apiResponse');
       return ApiCollection.fromJson(
         apiResponse.data,
         IdPlanGroupModel.fromJson,
       );
     } catch (error) {
-      print(error);
+      print('getPlansByGroupId error: $error');
       rethrow;
     }
   }

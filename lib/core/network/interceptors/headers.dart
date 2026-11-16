@@ -8,7 +8,7 @@ class HeadersInterceptors extends QueuedInterceptor {
     options.headers['AppVersion'] = 'kGEufq53XKtX5Ozs+ARsxOJtpvdC2Vo1EgAf4oAXOul1TZyDc3xAJ9pE9QXDe3KiuPmHdJ24crrIY6C2v0IKMg==';
     options.headers['AppBundle'] = 'com.nucodiga.tectrans';
     options.headers['OSClient'] = 'iOS';
-    options.headers['Authorization'] = 'Bearer $urlTokend';
+    options.headers['Authorization'] = urlTokend;
     handler.next(options);
   }
 }

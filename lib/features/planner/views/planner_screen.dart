@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mi_app_prueba/core/errors/failure.dart';
+import 'package:mi_app_prueba/core/network/api_constants.dart';
 import 'package:mi_app_prueba/core/network/bloc/base_bloc.dart';
 import 'package:mi_app_prueba/features/planner/bloc/planner_bloc.dart';
 import 'package:mi_app_prueba/features/planner/models/group_model.dart';
+import 'package:mi_app_prueba/features/planner/models/id_plan_group_model.dart';
 import 'package:mi_app_prueba/shared/loader/loader.dart';
 
 import '../widgets/appbar.dart';
@@ -36,6 +38,10 @@ class _PlannerScreenState extends State<PlannerScreen> {
         switch (state) {
           case GroupsObtained(:final List<GroupModel> groups):
             print('resultado groups: $groups');
+            break;
+
+          case PlansByGroupObtained(:final List<IdPlanGroupModel> plans):
+            print('resultado plans: $plans');
             break;
 
           case PlannerError(:final String error):
@@ -73,7 +79,10 @@ class _PlannerScreenState extends State<PlannerScreen> {
               ],
             ),
 
-            bottomNavigationBar: CustomBottomBar(onTap: _getMyGroups),
+            bottomNavigationBar: CustomBottomBar(
+              onTap: _getMyGroups,
+              onPlansTap: _getPlansByGroupId,
+            ),
           ),
 
           BlocBuilder<PlannerBloc, BaseState>(
@@ -91,5 +100,15 @@ class _PlannerScreenState extends State<PlannerScreen> {
 
   void _getMyGroups() {
     context.read<PlannerBloc>().add(MyGroupRequested());
+  }
+
+  void _getPlansByGroupId() {
+    if (ApiConstants.fixedGroupId.isEmpty) {
+      print('error en ApiConstants.fixedGroupId');
+      return;
+    }
+    context.read<PlannerBloc>().add(
+      PlansByGroupRequested(groupId: ApiConstants.fixedGroupId),
+    );
   }
 }
