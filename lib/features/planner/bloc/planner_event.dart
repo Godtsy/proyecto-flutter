@@ -8,3 +8,11 @@ sealed class PlannerEvent extends Equatable {
 }
 
 final class MyGroupRequested extends PlannerEvent {}
+
+final class PlansByGroupRequested extends PlannerEvent {
+  final String groupId;
+  const PlansByGroupRequested({required this.groupId});
+
+  @override
+  List<Object> get props => [groupId];
+}

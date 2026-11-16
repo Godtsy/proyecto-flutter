@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mi_app_prueba/core/network/bloc/base_bloc.dart';
 import 'package:mi_app_prueba/core/network/models/api_collection.dart';
 import 'package:mi_app_prueba/features/planner/models/group_model.dart';
+import 'package:mi_app_prueba/features/planner/models/id_plan_group_model.dart';
 import 'package:mi_app_prueba/features/planner/services/planner_services.dart';
 
 part 'planner_event.dart';
@@ -12,6 +13,7 @@ part 'planner_state.dart';
 class PlannerBloc extends BaseBloc<PlannerEvent, BaseState> {
   PlannerBloc() : super(PlannerInitial()) {
     on<MyGroupRequested>(getMyGroups);
+    on<PlansByGroupRequested>(getPlansByGroupId);
   }
 
   final PlannerServices _plannerServices = PlannerServices();
@@ -20,11 +22,26 @@ class PlannerBloc extends BaseBloc<PlannerEvent, BaseState> {
     MyGroupRequested event,
     Emitter<BaseState> emit,
   ) async {
-    //emit(PlannerInProgres());
+    emit(PlannerInProgres());
     try {
       final ApiCollection<GroupModel> responseApi = await _plannerServices
           .getMyGroups();
       emit(GroupsObtained(groups: responseApi.data));
+    } on DioException catch (exception) {
+      handleNetworkError(exception, emit);
+    } catch (error) {
+      emit(PlannerError(error: error.toString()));
+    }
+  }
+
+  Future<void> getPlansByGroupId(
+    PlansByGroupRequested event,
+    Emitter<BaseState> emit,
+  ) async {
+    try {
+      final ApiCollection<IdPlanGroupModel> responseApi = await _plannerServices
+          .getPlansByGroupId(event.groupId);
+      emit(PlansByGroupObtained(plans: responseApi.data));
     } on DioException catch (exception) {
       handleNetworkError(exception, emit);
     } catch (error) {
