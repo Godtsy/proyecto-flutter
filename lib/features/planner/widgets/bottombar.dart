@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final VoidCallback onTap;
+  final VoidCallback onPlansTap;
 
-  const CustomBottomBar({required this.onTap, super.key});
+  const CustomBottomBar({
+    required this.onTap,
+    required this.onPlansTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +19,24 @@ class CustomBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              width: 52,
-              height: 52,
-              decoration: const BoxDecoration(
-                color: Color(0xFF2B71F3),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 4),
-                  ),
-                ],
+            GestureDetector(
+              onTap: onPlansTap,
+              child: Container(
+                width: 52,
+                height: 52,
+                decoration: const BoxDecoration(
+                  color: Color(0xFF2B71F3),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Icon(Icons.grid_view_rounded, color: Colors.white),
               ),
-              child: const Icon(Icons.grid_view_rounded, color: Colors.white),
             ),
 
             const SizedBox(width: 8),
